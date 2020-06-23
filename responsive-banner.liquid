@@ -1,0 +1,120 @@
+{% for block in section.blocks %}
+{%- if block.settings.banner-collection-select and block.settings.banner-collection-select == collection.handle -%}  
+<div class='responsive-banner' style="background:{{block.settings.banner-background}}" >
+    <h1 class='responsive-banner__heading' style="font-size:{{block.settings.banner-heading-size}}px">{{block.settings.banner-heading}}</h1>
+    <div class='responsive-banner__text' style="font-size:{{block.settings.banner-text-size}}px">
+      {{block.settings.banner-text}}
+    </div>  
+  </div>
+{%- endif -%} 
+{% endfor %}
+
+
+{% schema %}
+  {
+	"name": "Responsive Banner",
+	"max_blocks": 10,
+	"settings": [],
+	"blocks": [{
+		"type": "select",
+		"name": "Banner",
+		"settings": [{
+				"id": "banner-heading",
+				"type": "text",
+				"label": "Banner Heading",
+				"default": " This is the banner heading"
+			},
+			{
+				"type": "range",
+				"id": "banner-heading-size",
+				"min": 16,
+				"max": 72,
+				"step": 4,
+				"unit": "px",
+				"label": "Banner Heading Font Size",
+				"default": 32
+			},
+			{
+				"id": "banner-text",
+				"type": "richtext",
+				"label": "Banner Text",
+				"default": "<p>Enter some text here</p>"
+			},
+			{
+				"type": "range",
+				"id": "banner-text-size",
+				"min": 12,
+				"max": 72,
+				"step": 4,
+				"unit": "px",
+				"label": "Banner Text Font Size",
+				"default": 16
+			},
+			{
+				"type": "color",
+				"id": "banner-background",
+				"label": "Banner Background Colour",
+				"default": "#32a852"
+			},
+			{
+				"type": "collection",
+				"id": "banner-collection-select",
+				"label": "Banner Collection"
+			}
+		]
+	}],
+	"presets": [{
+		"name": "Banner Block",
+		"category": "Banner Blocks",
+		"blocks": [{
+				"type": "select"
+			},
+			{
+				"type": "select"
+			}
+		]
+	}]
+
+}
+{% endschema %}
+
+{% stylesheet %}
+
+.responsive-banner {
+	width: 100%;
+	min-height: 200px;
+	margin-bottom: 10px;
+	padding: 1rem;	
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items:center;
+}
+
+.responsive-banner__text p {
+color: #fff;
+}
+
+@media screen and (max-width: 900px) {
+
+  .responsive-banner {
+      min-height: 120px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+	.responsive-banner {
+		min-height: 80px;
+	}
+
+    .responsive-banner__heading {        
+      	margin-bottom: .5rem;
+      	font-size: 1rem;		
+    }
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
